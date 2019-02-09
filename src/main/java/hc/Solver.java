@@ -49,8 +49,9 @@ public class Solver {
 
     /**
      * Finds all solutions of the problem, writes them into the given file.
+     * Current implementation does not support unique solution finding.
      * 
-     * @return List of unique solutions.
+     * @return List of all solutions.
      * @throws IOException If the write operation is failed.
      */
     public List<Folding> findAll() throws IOException {
