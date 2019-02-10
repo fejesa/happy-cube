@@ -28,7 +28,7 @@ public class Solver {
     }
 
     /**
-     * Finds a first solution of the problem and writes the result to the given
+     * Finds a solution of the problem and writes the result to the given
      * file.
      * 
      * @return The result or null if not found.
@@ -55,7 +55,7 @@ public class Solver {
      * @throws IOException If the write operation is failed.
      */
     public List<Folding> findAll() throws IOException {
-	List<Folding> results = new ArrayList<Folding>();
+	List<Folding> results = new ArrayList<>();
 	for (Iterator<Folding> i = cube.iterator(); i.hasNext();) {
 	    Folding folding = i.next();
 	    if (folding.isAllEdgesValid() && folding.isAllCornersValid()) {

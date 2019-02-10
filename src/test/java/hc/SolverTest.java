@@ -3,6 +3,7 @@ package hc;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -23,7 +24,8 @@ public class SolverTest {
     @Test
     public void rotateOneFace() throws IOException {
 	List<Face> faces = createFaces();
-	faces.get(2).nextPos();
+	Collections.reverse(faces);
+	//faces.get(2).nextPos();
 	HC cube = new HC(faces);
 	Solver solver = new Solver(cube, Paths.get("solver_rotate_one_face.txt"));
 	Assert.assertNotNull(solver.findAny());

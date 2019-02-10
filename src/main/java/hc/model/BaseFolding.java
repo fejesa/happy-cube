@@ -73,45 +73,49 @@ public class BaseFolding implements Folding {
 	if (notJoinedEdge(down().rightEdge(), back().leftEdge())) {
 	    return false;
 	}
-	if (notJoinedEdge(down().leftEdge(), front().rightEdge())) {
-	    return false;
-	}
-	return true;
+	return notJoinedEdge(down().leftEdge(), front().rightEdge());
     }
 
     @Override
     public boolean isAllCornersValid() {
-	if (isNotValidCorner(left().topRightCorner(), up().bottomRightCorner(), back().topRightCorner())) {
+	if (notValidCorner(left().topRightCorner(), up().bottomRightCorner(), back().topRightCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(left().topLeftCorner(), up().bottomLeftCorner(), front().topLeftCorner())) {
+	if (notValidCorner(left().topLeftCorner(), up().bottomLeftCorner(), front().topLeftCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(back().bottomRightCorner(), right().bottomRightCorner(), up().topRightCorner())) {
+	if (notValidCorner(back().bottomRightCorner(), right().bottomRightCorner(), up().topRightCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(front().bottomLeftCorner(), right().bottomLeftCorner(), up().topLeftCorner())) {
+	if (notValidCorner(front().bottomLeftCorner(), right().bottomLeftCorner(), up().topLeftCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(left().bottomLeftCorner(), down().topLeftCorner(), front().topRightCorner())) {
+	if (notValidCorner(left().bottomLeftCorner(), down().topLeftCorner(), front().topRightCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(left().bottomRightCorner(), down().topRightCorner(), back().topLeftCorner())) {
+	if (notValidCorner(left().bottomRightCorner(), down().topRightCorner(), back().topLeftCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(front().bottomRightCorner(), down().bottomLeftCorner(), right().topLeftCorner())) {
+	if (notValidCorner(front().bottomRightCorner(), down().bottomLeftCorner(), right().topLeftCorner())) {
 	    return false;
 	}
-	if (isNotValidCorner(down().bottomRightCorner(), back().bottomLeftCorner(), right().topRightCorner())) {
-	    return false;
-	}
-	return true;
+	return notValidCorner(down().bottomRightCorner(), back().bottomLeftCorner(), right().topRightCorner());
     }
 
-    private boolean isNotValidCorner(byte a, byte b, byte c) {
+    /**
+     * A corner is valid if the given corners of the three joined faces have no collision.
+     * In this case the sum of the three given values must be 1. 
+     * @return <tt>true</tt> if there is a collision.
+     */
+    private boolean notValidCorner(byte a, byte b, byte c) {
 	return a + b + c != 1;
     }
 
+    /**
+     * An edge is valid if the given edges of the two faces can be joined without overlapping.
+     * For example in one edge is mapped as {0,1,0,1,0} and the other is {1,0,1,0,0} then they can be joined. 
+     * @return <tt>true</tt> if the two edges cannot be joined.
+     */
     private boolean notJoinedEdge(byte[] a, byte[] b) {
 	for (int i = 1; i < 4; ++i) {
 	    if (a[i] + b[i] != 1) {

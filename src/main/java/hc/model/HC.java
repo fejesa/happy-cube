@@ -2,17 +2,18 @@ package hc.model;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import hc.util.Permutations;
 
 /**
- * A happy cube composition that contains 6 pieces/faces. Faces positions are
- * being changed when we try to find the final ones. The searching space is
- * defined but is generated on the fly while the solver iterates on it. During
- * the iteration one of the face position is changed or a new face folding is
- * generated.
+ * A happy cube composition that contains 6 pieces/faces in any order and
+ * position. Faces positions are being changed when we try to find the final
+ * ones. The searching space is defined but is generated on the fly while the
+ * solver iterates on it. During the iteration the position of the one of the
+ * faces is changed or a new face folding is generated.
  * 
  * @author andras
  *
@@ -54,7 +55,7 @@ public class HC implements Iterable<Folding> {
 
 	public SearchSpaceIterator() {
 	    long permutations = Permutations.factorial(NUMBER_OF_FACES);
-	    this.rotations = Double.valueOf(Math.pow(8, NUMBER_OF_FACES)).intValue();
+	    this.rotations = (int) Math.pow(8, NUMBER_OF_FACES);
 	    this.total = permutations * rotations;
 	}
 
@@ -65,6 +66,9 @@ public class HC implements Iterable<Folding> {
 
 	@Override
 	public Folding next() {
+	    if (!hasNext()) {
+		throw new NoSuchElementException();
+	    }
 	    // Each piece can be rotated or turned 8 times
 	    // So the total is 8^6; if all of the are tried
 	    // the pieces are reordered and continue...
@@ -82,9 +86,10 @@ public class HC implements Iterable<Folding> {
 	}
 
 	/**
+	 * Creates a clone of the original faces.</br>
 	 * We have to use the original faces for the next permutation generation. A face
-	 * rotation changes its internal state, so we clone the faces and working on
-	 * those. Creates a clone of the original faces.
+	 * rotation changes its internal state, so we clone the faces and work on
+	 * those ones.
 	 */
 	private void nextPermutation() {
 	    work = Permutations
