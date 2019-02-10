@@ -1,5 +1,7 @@
 package hc.model;
 
+import java.util.List;
+
 /**
  * Represents a folding of a cube. There are 11 combinations to make a cube
  * without reversing them. Implementation of this interface represents a net.
@@ -22,4 +24,9 @@ public interface Folding {
      * @return <tt>true</tt> if all corner is valid
      */
     boolean isAllCornersValid();
+
+    /**
+     * Sets the cube faces.
+     */
+    void setFaces(List<Face> faces);
 }

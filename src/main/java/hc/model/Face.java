@@ -12,6 +12,8 @@ public class Face {
 
     public static final int LENGTH = 5;
 
+    private static final int ROTATIONS = 4;
+
     private final String id;
 
     /** 0..1; value is changed when the piece is turned to the opposite side. */
@@ -36,8 +38,6 @@ public class Face {
 
 	this.id = face.id;
 	this.matrix = array;
-	this.orientation = face.orientation;
-	this.rotationIndex = face.rotationIndex;
     }
 
     public String getLabel() {
@@ -50,7 +50,8 @@ public class Face {
      * @return The result of the transformation.
      */
     public Face nextPos() {
-	if (rotationIndex == 3) {
+	
+	if (rotationIndex == ROTATIONS - 1) {
 	    turn();
 	} else {
 	    rotate();
@@ -69,17 +70,17 @@ public class Face {
     public byte[] leftEdge() {
 	byte[] left = new byte[LENGTH];
 	for (int i = 0; i < LENGTH; ++i) {
-	    left[i] = matrix[i][0];
+	    left[i] = matrix[LENGTH - 1 - i][0];
 	}
 	return left;
     }
 
     public byte[] rightEdge() {
-	byte[] left = new byte[LENGTH];
+	byte[] right = new byte[LENGTH];
 	for (int i = 0; i < LENGTH; ++i) {
-	    left[i] = matrix[i][LENGTH - 1];
+	    right[i] = matrix[LENGTH - 1 - i][LENGTH - 1];
 	}
-	return left;
+	return right;
     }
 
     public byte topLeftCorner() {
@@ -112,7 +113,7 @@ public class Face {
 		matrix[j][length - 1 - i] = temp;
 	    }
 	}
-	rotationIndex = rotationIndex == 3 ? 0 : ++rotationIndex;
+	rotationIndex = rotationIndex == ROTATIONS - 1 ? 0 : ++rotationIndex;
     }
 
     /**

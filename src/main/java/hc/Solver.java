@@ -17,6 +17,7 @@ import hc.model.HC;
  * @author andras
  *
  */
+@SuppressWarnings("rawtypes")
 public class Solver {
 
     private final HC cube;
@@ -36,7 +37,8 @@ public class Solver {
      */
     public Folding findAny() throws IOException {
 	Folding result = null;
-	for (Iterator<Folding> i = cube.iterator(); i.hasNext();) {
+	for (@SuppressWarnings("unchecked")
+	Iterator<Folding> i = cube.iterator(); i.hasNext();) {
 	    Folding folding = i.next();
 	    if (folding.isAllEdgesValid() && folding.isAllCornersValid()) {
 		write(folding);
@@ -56,7 +58,8 @@ public class Solver {
      */
     public List<Folding> findAll() throws IOException {
 	List<Folding> results = new ArrayList<>();
-	for (Iterator<Folding> i = cube.iterator(); i.hasNext();) {
+	for (@SuppressWarnings("unchecked")
+	Iterator<Folding> i = cube.iterator(); i.hasNext();) {
 	    Folding folding = i.next();
 	    if (folding.isAllEdgesValid() && folding.isAllCornersValid()) {
 		write(folding);

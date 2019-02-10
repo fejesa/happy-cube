@@ -17,30 +17,36 @@ import hc.util.Permutations;
  * 
  * @author andras
  *
+ * @param <F> {@link Folding} type
  */
-public class HC implements Iterable<Folding> {
-
-    private final List<Face> faces;
+public class HC<F extends Folding> implements Iterable<F> {
 
     private static final int NUMBER_OF_FACES = 6;
+    
+    /** List of cube faces that must be checked. */
+    private final List<Face> faces;
 
-    public HC(List<Face> faces) {
+    /** The type of the folding instance that will be generated. */
+    private final Class<F> type;
+
+    public HC(List<Face> faces, Class<F> type) {
 	Objects.requireNonNull(faces);
 	if (faces.size() != NUMBER_OF_FACES) {
 	    throw new IllegalArgumentException("Cube must have 6 faces");
 	}
 	this.faces = faces;
+	this.type = type;
     }
 
     @Override
-    public Iterator<Folding> iterator() {
+    public Iterator<F> iterator() {
 	return new SearchSpaceIterator();
     }
 
-    private class SearchSpaceIterator implements Iterator<Folding> {
+    private class SearchSpaceIterator implements Iterator<F> {
 
 	/**
-	 * Number of rotation can be executed within a permutation. In our case it is
+	 * Number of rotations can be executed within a permutation. In our case it is
 	 * 8^6
 	 */
 	private final int rotations;
@@ -65,24 +71,27 @@ public class HC implements Iterable<Folding> {
 	}
 
 	@Override
-	public Folding next() {
+	public F next() {
 	    if (!hasNext()) {
 		throw new NoSuchElementException();
 	    }
 	    // Each piece can be rotated or turned 8 times
 	    // So the total is 8^6; if all of the are tried
 	    // the pieces are reordered and continue...
-	    if (work == null) {
+	    if (current % rotations == 0) {
 		nextPermutation();
 	    } else {
-		if (current % rotations == 0) {
-		    nextPermutation();
-		} else {
-		    work.get(current % NUMBER_OF_FACES).nextPos();
-		}
-		++current;
+		work.get(current % NUMBER_OF_FACES).nextPos();
 	    }
-	    return new BaseFolding(work);
+	    ++current;
+
+	    try {
+		F folding = type.newInstance();
+		folding.setFaces(work);
+		return folding;
+	    } catch (InstantiationException | IllegalAccessException e) {
+		throw new IllegalArgumentException("Unsupported folding type");
+	    }
 	}
 
 	/**

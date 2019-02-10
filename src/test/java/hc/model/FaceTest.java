@@ -1,5 +1,7 @@
 package hc.model;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -48,13 +50,29 @@ public class FaceTest {
 	}
     }
 
+    @Test
+    public void leftEdge() {
+	Face face = new Face("0", createMatrix());
+	byte[] left = face.leftEdge();
+	byte[] expected = new byte[] {0,0,1,0,1};
+	Assert.assertTrue(Arrays.equals(left, expected));
+    }
+    
+    @Test
+    public void rightEdge() {
+	Face face = new Face("0", createMatrix());
+	byte[] right = face.rightEdge();
+	byte[] expected = new byte[] {0,0,1,0,1};
+	Assert.assertTrue(Arrays.equals(right, expected));
+    }
+    
     private byte[][] createMatrix() {
 	return new byte[][] {
-	    {0,1,0,1,0},
-	    {1,1,1,1,0},
-	    {0,1,1,1,1},
-	    {1,1,1,1,0},
-	    {1,1,0,1,1}
+	    {1,1,0,1,1},
+	    {0,1,1,1,0},
+	    {1,1,1,1,1},
+	    {0,1,1,1,0},
+	    {0,1,1,0,0}
 	};
     }
 }
