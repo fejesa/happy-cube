@@ -39,6 +39,137 @@ public class SolverTest {
 	Assert.assertNotNull(solver.findAny());
     }
 
+    @Test
+    public void yellowFaces() throws IOException {
+	HC<BaseFolding> cube = new HC<>(createYellowFaces(), BaseFolding.class);
+	Solver solver = new Solver(cube, Paths.get("solver_yellow.txt"));
+	Assert.assertNotNull(solver.findAny());
+    }
+
+    @Test
+    public void purpleFaces() throws IOException {
+	HC<BaseFolding> cube = new HC<>(createPurpleFaces(), BaseFolding.class);
+	Solver solver = new Solver(cube, Paths.get("solver_purple.txt"));
+	Assert.assertNull(solver.findAny());
+    }
+    
+    private List<Face> createPurpleFaces() {
+	byte[][] F1 = new byte[][] {
+	    {1,1,0,1,0},
+	    {1,1,1,1,0},
+	    {1,1,1,1,0},
+	    {0,1,1,1,1},
+	    {0,0,1,0,0}
+	};
+
+	byte[][] F2 = new byte[][] {
+	    {0,0,0,1,1},
+	    {1,1,1,1,0},
+	    {1,1,1,1,1},
+	    {0,1,1,1,0},
+	    {0,1,0,1,0}
+	};
+
+	byte[][] F3 = new byte[][] {
+	    {0,1,0,0,0},
+	    {1,1,1,1,0},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {0,0,1,0,0}
+	};
+
+	byte[][] F4 = new byte[][] {
+	    {1,1,0,1,1},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {0,1,1,1,0},
+	    {0,1,0,1,0}
+	};
+
+	byte[][] F5 = new byte[][] {
+	    {0,0,1,0,1},
+	    {0,1,1,1,1},
+	    {1,1,1,1,1},
+	    {1,1,1,1,0},
+	    {1,0,1,1,0}
+	};
+
+	byte[][] F6 = new byte[][] {
+	    {0,1,0,1,1},
+	    {0,1,1,1,0},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {1,1,0,1,0}
+	};
+
+	return Arrays.asList(
+		new Face("F1", F1),
+		new Face("F2", F2),
+		new Face("F3", F3),
+		new Face("F4", F4),
+		new Face("F5", F5),
+		new Face("F6", F6));
+
+    }
+    
+    private List<Face> createYellowFaces() {
+	byte[][] F1 = new byte[][] {
+	    {0,0,1,0,0},
+	    {1,1,1,1,0},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {0,1,0,1,0}
+	};
+
+	byte[][] F2 = new byte[][] {
+	    {0,0,1,0,1},
+	    {1,1,1,1,1},
+	    {0,1,1,1,0},
+	    {1,1,1,1,0},
+	    {0,1,0,1,0}
+	};
+
+	byte[][] F3 = new byte[][] {
+	    {0,0,1,0,1},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {1,1,1,1,1},
+	    {1,0,1,0,0}
+	};
+
+	byte[][] F4 = new byte[][] {
+	    {1,0,1,0,1},
+	    {1,1,1,1,1},
+	    {0,1,1,1,0},
+	    {1,1,1,1,1},
+	    {1,0,1,0,0}
+	};
+
+	byte[][] F5 = new byte[][] {
+	    {0,0,1,0,0},
+	    {0,1,1,1,1},
+	    {1,1,1,1,0},
+	    {0,1,1,1,1},
+	    {1,1,0,1,0}
+	};
+
+	byte[][] F6 = new byte[][] {
+	    {0,1,0,1,0},
+	    {0,1,1,1,0},
+	    {1,1,1,1,1},
+	    {0,1,1,1,0},
+	    {0,1,0,1,1}
+	};
+
+	return Arrays.asList(
+		new Face("F1", F1),
+		new Face("F2", F2),
+		new Face("F3", F3),
+		new Face("F4", F4),
+		new Face("F5", F5),
+		new Face("F6", F6));
+    }
+    
     private List<Face> createRedFaces() {
 	byte[][] F1 = new byte[][] {
 	    {1,1,0,1,1},
@@ -87,16 +218,18 @@ public class SolverTest {
 	    {0,1,1,1,0},
 	    {0,1,0,1,1}
 	};
+
 	return Arrays.asList(
 		new Face("F1", F1),
-		new Face("F4", F4),
 		new Face("F2", F2),
-		new Face("F5", F5),
 		new Face("F3", F3),
+		new Face("F4", F4),
+		new Face("F5", F5),
 		new Face("F6", F6));
-
     }
 
+ 
+    
     private List<Face> createBlueFaces() {
 	byte[][] F1 = new byte[][] {
 	    {0,0,1,0,0},

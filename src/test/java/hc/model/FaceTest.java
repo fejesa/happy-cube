@@ -37,7 +37,7 @@ public class FaceTest {
     }
 
     @Test
-    public void cycle() {
+    public void cycles() {
 	Face face = new Face("0", createMatrix());
 	String start = face.toString();
 	for (int i = 1; i <= 3 * 8; ++i) {
@@ -51,10 +51,19 @@ public class FaceTest {
     }
 
     @Test
+    public void oneCycle() {
+	Face face = new Face("0", createMatrix());
+	System.out.println(face);
+	for (int i = 0; i < 8; ++i) {
+	    System.out.println(face.nextPos());
+	}
+    }
+    
+    @Test
     public void leftEdge() {
 	Face face = new Face("0", createMatrix());
 	byte[] left = face.leftEdge();
-	byte[] expected = new byte[] {0,0,1,0,1};
+	byte[] expected = new byte[] {1,0,1,0,0};
 	Assert.assertTrue(Arrays.equals(left, expected));
     }
     
@@ -62,7 +71,7 @@ public class FaceTest {
     public void rightEdge() {
 	Face face = new Face("0", createMatrix());
 	byte[] right = face.rightEdge();
-	byte[] expected = new byte[] {0,0,1,0,1};
+	byte[] expected = new byte[] {1,0,1,0,0};
 	Assert.assertTrue(Arrays.equals(right, expected));
     }
     
