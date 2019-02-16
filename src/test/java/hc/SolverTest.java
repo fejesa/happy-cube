@@ -30,7 +30,7 @@ public class SolverTest {
 	Solver solver = new Solver(cube, Paths.get("solver_rotate_one_face_blue.txt"));
 	Assert.assertNotNull(solver.findAny());
     }
-    
+
     @Test
     public void redFaces() throws IOException {
 	List<Face> faces = createRedFaces();
@@ -38,9 +38,9 @@ public class SolverTest {
 	Solver solver = new Solver(cube, Paths.get("solver_red.txt"));
 	Assert.assertNotNull(solver.findAny());
     }
-    
+
     private List<Face> createRedFaces() {
-	byte[][] FRONT = new byte[][] {
+	byte[][] F1 = new byte[][] {
 	    {1,1,0,1,1},
 	    {0,1,1,1,0},
 	    {1,1,1,1,1},
@@ -48,7 +48,7 @@ public class SolverTest {
 	    {0,1,1,0,0}
 	};
 
-	byte[][] DOWN = new byte[][] {
+	byte[][] F2 = new byte[][] {
 	    {0,0,1,0,0},
 	    {1,1,1,1,0},
 	    {0,1,1,1,1},
@@ -56,7 +56,7 @@ public class SolverTest {
 	    {0,0,1,0,0}
 	};
 
-	byte[][] RIGHT = new byte[][] {
+	byte[][] F3 = new byte[][] {
 	    {1,1,0,1,1},
 	    {1,1,1,1,0},
 	    {0,1,1,1,1},
@@ -64,7 +64,7 @@ public class SolverTest {
 	    {1,1,0,1,0}
 	};
 
-	byte[][] UP = new byte[][] {
+	byte[][] F4 = new byte[][] {
 	    {0,0,1,0,1},
 	    {1,1,1,1,1},
 	    {0,1,1,1,0},
@@ -72,7 +72,7 @@ public class SolverTest {
 	    {0,1,1,0,0}
 	};
 
-	byte[][] BACK = new byte[][] {
+	byte[][] F5 = new byte[][] {
 	    {0,1,0,1,0},
 	    {1,1,1,1,0},
 	    {0,1,1,1,1},
@@ -80,7 +80,7 @@ public class SolverTest {
 	    {0,1,0,0,0}
 	};
 
-	byte[][] LEFT = new byte[][] {
+	byte[][] F6 = new byte[][] {
 	    {0,0,0,1,1},
 	    {0,1,1,1,0},
 	    {1,1,1,1,1},
@@ -88,17 +88,17 @@ public class SolverTest {
 	    {0,1,0,1,1}
 	};
 	return Arrays.asList(
-		new Face("UP", UP),
-		new Face("DOWN", DOWN),
-		new Face("BACK", BACK),
-		new Face("FRONT", FRONT),
-		new Face("RIGHT", RIGHT),
-		new Face("LEFT", LEFT));
+		new Face("F1", F1),
+		new Face("F4", F4),
+		new Face("F2", F2),
+		new Face("F5", F5),
+		new Face("F3", F3),
+		new Face("F6", F6));
 
     }
-    
+
     private List<Face> createBlueFaces() {
-	byte[][] FRONT = new byte[][] {
+	byte[][] F1 = new byte[][] {
 	    {0,0,1,0,0},
 	    {0,1,1,1,0},
 	    {1,1,1,1,1},
@@ -106,7 +106,7 @@ public class SolverTest {
 	    {0,0,1,0,0}
 	};
 
-	byte[][] RIGHT = new byte[][] {
+	byte[][] F3 = new byte[][] {
 	    {1,0,1,0,1},
 	    {1,1,1,1,1},
 	    {0,1,1,1,0},
@@ -114,7 +114,7 @@ public class SolverTest {
 	    {1,0,1,0,1}
 	};
 
-	byte[][] BACK = new byte[][] {
+	byte[][] F5 = new byte[][] {
 	    {0,0,1,0,0},
 	    {0,1,1,1,1},
 	    {1,1,1,1,0},
@@ -122,7 +122,7 @@ public class SolverTest {
 	    {0,0,1,0,0}
 	};
 
-	byte[][] UP = new byte[][] {
+	byte[][] F4 = new byte[][] {
 	    {0,1,0,1,0},
 	    {1,1,1,1,0},
 	    {0,1,1,1,1},
@@ -130,7 +130,7 @@ public class SolverTest {
 	    {1,1,0,1,0}
 	};
 
-	byte[][] DOWN = new byte[][] {
+	byte[][] F2 = new byte[][] {
 	    {1,0,1,0,0},
 	    {1,1,1,1,1},
 	    {0,1,1,1,0},
@@ -138,7 +138,7 @@ public class SolverTest {
 	    {0,1,0,1,0}
 	};
 
-	byte[][] LEFT = new byte[][] {
+	byte[][] F6 = new byte[][] {
 	    {0,0,1,0,1},
 	    {1,1,1,1,1},
 	    {0,1,1,1,0},
@@ -147,11 +147,11 @@ public class SolverTest {
 	};
 
 	return Arrays.asList(
-		new Face("DOWN", DOWN),
-		new Face("RIGHT", RIGHT),
-		new Face("UP", UP),
-		new Face("BACK", BACK),
-		new Face("FRONT", FRONT),
-		new Face("LEFT", LEFT));
+		new Face("F1", F1),
+		new Face("F2", F2),
+		new Face("F3", F3),
+		new Face("F4", F4),
+		new Face("F5", F5),
+		new Face("F6", F6));
     }
 }

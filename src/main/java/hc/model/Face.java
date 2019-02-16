@@ -63,19 +63,51 @@ public class Face {
 	return matrix[0];
     }
 
+    public byte[] reverseTopEdge() {
+	byte[] top = new byte[LENGTH];
+	for (int i = 0; i < LENGTH; ++i) {
+	    top[i] = matrix[0][LENGTH - 1 - i];
+	}
+	return top;
+    }
+    
     public byte[] bottomEdge() {
 	return matrix[LENGTH - 1];
     }
 
+    public byte[] reverseBottomEdge() {
+	byte[] bottom = new byte[LENGTH];
+	for (int i = 0; i < LENGTH; ++i) {
+	    bottom[i] = matrix[LENGTH - 1][LENGTH - 1 - i];
+	}
+	return bottom;
+    }
+    
     public byte[] leftEdge() {
+	byte[] left = new byte[LENGTH];
+	for (int i = 0; i < LENGTH; ++i) {
+	    left[i] = matrix[i][0];
+	}
+	return left;
+    }
+
+    public byte[] reverseLeftEdge() {
 	byte[] left = new byte[LENGTH];
 	for (int i = 0; i < LENGTH; ++i) {
 	    left[i] = matrix[LENGTH - 1 - i][0];
 	}
 	return left;
     }
-
+    
     public byte[] rightEdge() {
+	byte[] right = new byte[LENGTH];
+	for (int i = 0; i < LENGTH; ++i) {
+	    right[i] = matrix[i][LENGTH - 1];
+	}
+	return right;
+    }
+
+    public byte[] reverseRightEdge() {
 	byte[] right = new byte[LENGTH];
 	for (int i = 0; i < LENGTH; ++i) {
 	    right[i] = matrix[LENGTH - 1 - i][LENGTH - 1];
@@ -83,6 +115,7 @@ public class Face {
 	return right;
     }
 
+    
     public byte topLeftCorner() {
 	return matrix[0][0];
     }

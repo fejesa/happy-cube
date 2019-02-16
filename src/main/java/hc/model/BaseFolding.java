@@ -52,7 +52,7 @@ public class BaseFolding implements Folding {
 	if (notJoinedEdge(up().bottomEdge(), left().topEdge())) {
 	    return false;
 	}
-	if (notJoinedEdge(left().rightEdge(), back().topEdge())) {
+	if (notJoinedEdge(left().reverseRightEdge(), back().topEdge())) {
 	    return false;
 	}
 	if (notJoinedEdge(left().leftEdge(), front().topEdge())) {
@@ -62,13 +62,13 @@ public class BaseFolding implements Folding {
 	if (notJoinedEdge(right().rightEdge(), back().bottomEdge())) {
 	    return false;
 	}
-	if (notJoinedEdge(right().leftEdge(), front().bottomEdge())) {
+	if (notJoinedEdge(right().leftEdge(), front().reverseBottomEdge())) {
 	    return false;
 	}
-	if (notJoinedEdge(up().rightEdge(), back().rightEdge())) {
+	if (notJoinedEdge(up().rightEdge(), back().reverseRightEdge())) {
 	    return false;
 	}
-	if (notJoinedEdge(up().leftEdge(), front().leftEdge())) {
+	if (notJoinedEdge(up().leftEdge(), front().reverseLeftEdge())) {
 	    return false;
 	}
 	if (notJoinedEdge(down().rightEdge(), back().leftEdge())) {
